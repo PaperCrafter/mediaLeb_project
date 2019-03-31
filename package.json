@@ -1,0 +1,31 @@
+{
+  "name": "medialab_project",
+  "version": "0.0.1",
+  "description": "this is projcet which control modules such as arduiono or laspberrypi via web server",
+  "main": "app.js",
+  "dependencies": {
+    "connect-flash": "^0.1.1",
+    "cookie-parser": "^1.4.4",
+    "dotenv": "^7.0.0",
+    "express": "^4.16.4",
+    "express-session": "^1.15.6",
+    "morgan": "^1.9.1",
+    "mysql2": "^1.6.5",
+    "pug": "^2.0.3",
+    "sequelize": "^5.2.7"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PaperCrafter/mediaLeb_project.git"
+  },
+  "author": "papercrafter",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PaperCrafter/mediaLeb_project/issues"
+  },
+  "homepage": "https://github.com/PaperCrafter/mediaLeb_project#readme"
+}
