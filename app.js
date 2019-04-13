@@ -4,13 +4,15 @@ const morgan = require('morgan');
 const path = require('path');
 const session = require('express-session');
 const flash = require('connect-flash');
-//const {sequelize} = require('./models');
+const {sequelize} = require('./models');
 
 const app = express();
-//sequelize.sync();
+sequelize.sync();
 
+//사용자 측에서 보이는 client page 담당 router
 const pageRouter = require('./routes/page');
-
+//아두이노 측에서 사용하는 router
+const arduRouter = require('./routes/ardu');
 
 
 //미들웨어 연결
@@ -35,7 +37,10 @@ app.use(session({
 
 app.use(flash());
 
-app.get('/',pageRouter);
+app.use('/', pageRouter);
+
+app.use('/ardu', arduRouter);
+
 
 app.get('/call', (req, res, next)=>{
     try{

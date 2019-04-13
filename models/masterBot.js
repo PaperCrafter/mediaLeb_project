@@ -6,7 +6,7 @@ module.exports = (sequelize, DataTypes)=>(
             unique:true,
         },
         func:{
-            type:DataTypes.INTEGER(20),
+            type:DataTypes.STRING(20),
             allowNull:true,
         }
     },{
