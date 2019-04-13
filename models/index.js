@@ -11,7 +11,8 @@ const sequelize = new Sequelize(
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
-db.MasterBot = require('./MasterBot')(sequelize, Sequelize);
+db.MasterBot = require('./masterBot')(sequelize, Sequelize);
+
 /*
 db.SlaveBot = require('./slaveBot')(sequelize, Sequelize);
 

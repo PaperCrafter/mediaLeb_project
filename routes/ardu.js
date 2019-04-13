@@ -1,7 +1,7 @@
 const express = require('express');
 
 const router = express.Router();
-const {model} = require('../models');
+const {MasterBot} = require('../models');
 
 router.get('/call', async(req, res, next)=>{
     try{
@@ -13,32 +13,26 @@ router.get('/call', async(req, res, next)=>{
 
 
         try{
-            const ipDb = await model.find({where:{ip:ip}});
-            //db에 해당 ip 존재
+            const ipDb = await MasterBot.findAll({where:{'ip':ip}});
+            //db에 해당 ip 존재시 db 정보 전송
             if(ipDb){
+                console.log("res 전송!!");
                 res.send(ipDb);
-            }
-            //없을 경우
-            else{
-                await model.create({
+            }else{
+                 //없을 경우 db를 만들어 줍니다
+                await MasterBot.create({
                     ip : ip,
                     func :0,
                 });
                 console.log('row created!');
             }
+            
         }catch(error){
+
             console.error(error);
             return next(error);
         }
 
-        /*
-        const responseJson = {
-            'ip': ip,
-            'function' : "temp" ,
-        }
-
-        res.send(responseJson);
-        */
 
     }catch(err){
         
