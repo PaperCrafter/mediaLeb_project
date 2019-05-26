@@ -1,3 +1,17 @@
+ 
+const SocketIO = require('socket.io');
+
+module.exports = (server, app) => {
+    const io = SocketIO(server, {path :'/socket.io'})
+    app.set('io', io);
+    io.on('connection', (socket)=>{
+        console.log('socket.io 접근');
+        socket.on('disconnect', ()=>{
+            console.log('연결이 끊어졌습니다.');
+        })
+    })
+}
+
 io.on('connection', socket => {
     console.log('a user connected')
     socket.emit('connected')
@@ -5,7 +19,7 @@ io.on('connection', socket => {
       console.log(`socket with id ${id} just clicked on { ${x}, ${y} }`)
       socket.emit('click')
     })
-  })
+  });
   
   // add these lines:
   const serialport = require('serialport')

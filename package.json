@@ -9,6 +9,8 @@
     "cookie-parser": "^1.4.4",
     "express": "^4.16.4",
     "express-session": "^1.16.1",
+    "firmata": "^2.0.0",
+    "johnny-five": "^1.0.0",
     "morgan": "^1.9.1",
     "mysql": "^2.16.0",
     "mysql2": "^1.6.5",
@@ -17,11 +19,12 @@
     "pug": "^2.0.3",
     "sequelize": "^5.3.5",
     "sequelize-cli": "^5.4.0",
-    "socket.io": "^2.2.0"
+    "socket.io": "^2.2.0",
+    "udp-serial": "^0.2.0"
   },
   "devDependencies": {},
   "scripts": {
-    "start": "nodemon app"
+    "start": "nodemon app && arduino.js"
   },
   "repository": {
     "type": "git",
