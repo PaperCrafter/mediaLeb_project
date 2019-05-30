@@ -4,19 +4,19 @@ block content
     div.container
         div.center-block(style="width:1200px; display:flex")
             div.input-group(style="background:#f0f0f0; padding:10px; border-radius:10px; margin-bottom:30px; width:250px; text-align:center; flex-direction:column")
-                form(method='POST' action='/adminModule/register' style="text-align:left" )
+                form#masterRegister(style="text-align:left" )
                     h3 master 등록
         
-                    label(for='name') Name 
+                    label Name 
                     input#name.form-control(type='text', placeholder='name' name='name')
                                             
-                    label(for='ip') IP-Address                         
+                    label IP-Address                         
                     input#ip.form-control(type='text', placeholder='IP-Address' name='ip')
 
-                    button#masterRegister.btn.btn-secondary(type='submit' style="width:70%") 등록
+                    button.btn.btn-secondary(type='submit' style="width:70%") 등록
 
             div(style="padding:20px")
-                table.table
+                table#tblardu.table
                     thead.thead-dark
                         tr
                             th(scope="col") #
@@ -26,41 +26,20 @@ block content
                             th(scope="col") confirm-connected
                             th(scope="col") delete
                     tbody
-                        tr
-                            th(scope="col") 1
-                            td name
-                            td ip
-                            td 
-                                select.form-control
-                                    option LED skin
-                                    option Motor skin
-                            td 
-                                button.btn.btn-secondary(type='submit') 확인
-                            td
-                                button.btn.btn-secondary(type='submit') 제거
+                        for master in DB
+                            tr
+                                td= master.id
+                                td= master.name
+                                td= master.ip                              
+                                td
+                                    select.form-control(value=`${master.skin}`)
+                                        option LED skin
+                                        option Motor skin
+                                td 
+                                    button.btn.btn-secondary(type='submit' id=`${DB.id}_confirm`) 확인
+                                td
+                                    button.btn.btn-secondary(type='submit' id = `${DB.id}_delete`) 제거
+                       
+    script(src='./sequelize.js')
 
-                        tr
-                            th(scope="col") 2
-                            td name
-                            td ip
-                            td
-                                select.form-control
-                                    option LED skin
-                                    option Motor skin
-                            td 
-                                button.btn.btn-secondary(type='submit') 확인
-                            td
-                                button.btn.btn-secondary(type='submit') 제거
-script.
-    var xhr = new XMLHttpRequest();
-        xhr.onreadystatechange = function() { // 요청에 대한 콜백
-        if (xhr.readyState === xhr.DONE) { // 요청이 완료되면
-            if (xhr.status === 200 || xhr.status === 201) {
-            console.log(xhr.responseText);
-            } else {
-            console.error(xhr.responseText);
-            }
-        }
-    };
-    xhr.open('GET', 'https://www.zerocho.com/api/get'); // 메소드와 주소 설정
-    xhr.send();
+

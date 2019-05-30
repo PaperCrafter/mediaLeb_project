@@ -1,4 +1,5 @@
 const express = require('express');
+const {MasterBot} = require('../models');
 
 const router = express.Router();
 
