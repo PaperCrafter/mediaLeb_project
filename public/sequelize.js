@@ -1,3 +1,4 @@
+    
 function getMasterBots(){
     var xhr = new XMLHttpRequest();
     xhr.onload = function(){
@@ -85,28 +86,28 @@ document.getElementById('masterRegister').addEventListener('submit', function(e)
 });
 
 
+var deleteBtn = document.getElementById("tblardu").querySelectorAll("button");
+for(var x=0; x<deleteBtn.length; x++)
+{
+    deleteBtn[x].onclick = function (e) { 
+        e.preventDefault();
+        alert(e.target.id);
+        let id = e.target.id;
+        id.replace('_delete','');
+        //id = id - "_delete";
+        var xhr = new XMLHttpRequest();
 
-document.getElementById('tblardu').addEventListener('submit', function(e){
-    e.preventDefault();
-    deleteItem();
-});
+        xhr.onload = function(){
+            if(xhr.status === 201||xhr.status === 200){
+                console.log(xhr.responseText);
+                getMasterBots();
+            }else{
+                console.error(xhr.responseText);
+            }
+        };
 
-function deleteItem(){
-    const id = e.target.id;
-    id = id - "_delete";
-    var xhr = new XMLHttpRequest();
-    xhr.onload = function(){
-        if(xhr.status === 201){
-            console.log(xhr.responseText);
-            getMasterBots();
-        }else{
-            console.error(xhr.responseText);
-        }
+        xhr.open('DELETE', '/admin/delete');
+        xhr.setRequestHeader('Content-type', 'application/json');
+        xhr.send(JSON.stringify({id: id}));
     };
-    xhr.open('DELETE', '/admin/delete');
-    xhr.setRequestHeader('Content-type', 'application/json');
-    xhr.send(JSON.stringify({id: id}));
-    e.target.name.value = '';
-    e.target.ip.value='';
-    getMasterBots();
 }

@@ -35,13 +35,19 @@ router.post('/register', async(req, res, next)=>{
 
 router.get('/getList', async(req, res)=>{
     const DB = await MasterBot.findAll();
-    console.log(DB);
-    res.json(DB);
+    //console.log(DB);
+    //res.status(201);
+    res.json({DB});
 });
 
 router.delete('/delete',async(req,res,next)=>{
-    const DB = await MasterBot.destroy({where: {id: res.body.id}});
-    res.status(201);
+
+    await MasterBot.destroy({where: {id: req.body.id}});
+    const DB = await MasterBot.findAll();
+    //console.log(DB);
+    //res.json(DB);
+
+   // res.status(201);
 });
 
 module.exports = router;
