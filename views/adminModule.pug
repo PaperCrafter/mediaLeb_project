@@ -1,7 +1,7 @@
 extends layout
 
 block content
-    div.container
+    div.container_master
         div.center-block(style="width:1200px; display:flex")
             div.input-group(style="background:#f0f0f0; padding:10px; border-radius:10px; margin-bottom:30px; width:250px; text-align:center; flex-direction:column")
                 form#masterRegister(style="text-align:left" )
@@ -29,15 +29,40 @@ block content
                         for master in DB
                             tr
                                 td= master.id
-                                td= master.name
+                                td.ardu_name= master.name
                                 td= master.ip                              
                                 td
                                     select.form-control(value=`${master.skin}`)
                                         option LED skin
                                         option Motor skin
                                 td 
-                                    button.btn.btn-secondary(type='submit' id=`${master.id}_confirm`) 확인
+                                    button.btn.btn-secondary.confirm(type='submit' id=`${master.id}_confirm`) 확인
                                 td
-                                    button.btn.btn-secondary(type='submit' id = `${master.id}_delete`) 제거                       
+                                    button.btn.btn-secondary.delete(type='submit' id = `${master.id}_delete`) 제거                       
+
+    div.container_slave
+            div.center-block(style="width:1200px; display:flex")
+                div.input-group(style="background:#f0f0f0; padding:10px; border-radius:10px; margin-bottom:30px; width:250px; text-align:center; flex-direction:column")
+                    form#masterRegister(style="text-align:left" )
+                        h3 slave 등록
+            
+                        label Name
+                        input#name.form-control(type='text', placeholder='name' name='name')
+
+                        label skin
+                        input#ip.form-control(type='text', placeholder='IP-Address' name='skin')
+
+                        button.btn.btn-secondary(type='submit' style="width:70%") 등록
+
+                div(style="padding:20px")
+                    table#tblardu.table
+                        thead.thead-dark
+                            tr
+                                th(scope="col") #
+                                th(scope="col") Name
+                                th(scope="col") Skin
+                                th(scope="col") confirm-connected
+                                th(scope="col") delete
+                        tbody
 
     script(src='./sequelize.js')

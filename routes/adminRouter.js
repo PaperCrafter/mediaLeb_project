@@ -24,9 +24,8 @@ router.post('/register', async(req, res, next)=>{
             ip : req.body.ip,
         });
 
-        console.log('row created!');
         res.status(201);
-
+        res.send();
     }catch(error){
         console.error(error);
         return next(error);
@@ -37,17 +36,16 @@ router.get('/getList', async(req, res)=>{
     const DB = await MasterBot.findAll();
     //console.log(DB);
     //res.status(201);
-    res.json({DB});
+    res.json(DB);
 });
 
 router.delete('/delete',async(req,res,next)=>{
 
     await MasterBot.destroy({where: {id: req.body.id}});
     const DB = await MasterBot.findAll();
-    //console.log(DB);
-    //res.json(DB);
-
-   // res.status(201);
+    res.status(201);
+    res.send();
+    console.log();
 });
 
 module.exports = router;
