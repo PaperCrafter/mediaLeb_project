@@ -23,7 +23,7 @@ const app = express();
 
 sequelize.sync();
 
-const io = require('socket.io');
+
 
 const mainRouter = require('./routes/mainRouter');
 const adminRouter = require('./routes/adminRouter');
@@ -61,8 +61,31 @@ const server = app.listen(process.env.PORT || config.port, ()=> {
   console.log('Socket server listening at: ' + port);
 });
 
+global.io = require('socket.io').listen(server);
+/*
+const io = require('socket.io')(server);
+console.log(io);
+console.log(4321);
+*/
+module.exports = require('socket.io')(server);
+
 //소켓서버 연결
-io(server);
+//io.listen(server);
+
+/*
+// NameSpace 1번
+const namespace1 = io.of('/namespace1');
+// connection을 받으면, news 이벤트에 hello 객체를 담아 보낸다
+namespace1.on('connection', (socket) => {
+  namespace1.emit('news', { hello: 'Someone connected at namespace1' });
+});
+// NameSpace 2번
+const namespace2 = io.of('/namespace2');
+// connection을 받으면, news 이벤트에 hello 객체를 담아 보낸다
+namespace2.on('connection', (socket) => {
+  namespace2.emit('news', { hello: 'Someone connected at Namespace2' });
+});
+*/
 
 /*
 let ardu1;

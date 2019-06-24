@@ -66,7 +66,6 @@ getSlave = (id)=>{
                 td.appendChild(remove);
                 row.appendChild(td);
                 
-
                 tbody.appendChild(row);
             })
         }

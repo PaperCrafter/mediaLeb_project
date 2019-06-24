@@ -1,60 +1,59 @@
-getModules=()=>{
-    var xhr = new XMLHttpRequest();
-    xhr.onload = ()=>{
-        if(xhr.status == 200){
-            var master = JSON.parse(xhr.responseText);
-            console.log(master);
-            
-            pageBody = document.querySelector('.modules');
-            
 
-            var tbody = document.querySelector('.modules');
-            tbody.innerHTML ="";
-            master.map((master)=>{
-                var tr = document.createElement('tr');
-                var td = document.createElement('td');
-                td.textContent = master.id;
-                tr.appendChild(td);
-                
-                var td = document.createElement('td');
-                td.textContent = master.name;
-                tr.appendChild(td);
-                
-                var td = document.createElement('td');
-                td.textContent = master.ip;
-                tr.appendChild(td);
+masterMovement = () =>{
 
-                var td = document.createElement('td');
-                var sel = document.createElement('select');
-                td.appendChild(sel);
-                tr.appendChild(td);
-                
-                var td = document.createElement('td');
-                var btn = document.createElement('button');
-                btn.className = "btn btn-secondary confirm";
+    const tbl = document.querySelectorAll('.modules table');
+    for(var i = 0; i <tbl.length; i++){
+        master = tbl[i].querySelector('.master');
 
-                btn.type="submit";
-                btn.id=`${master.id}_confirm`;
-                btn.textContent = "확인";
-                td.appendChild(btn);
-                tr.appendChild(td);
+        master.addEventListener('click', (e)=>{
+            e.preventDefault();
+            console.log(e.target.textContent)
+            namespaceMaster(e.target.textContent);
+        });
+    }
 
-                var td = document.createElement('td');
-                var btn = document.createElement('button');
-                btn.className = "btn btn-secondary delete";
-                btn.type="submit";
-                btn.id=`${master.id}_delete`;
-                btn.textContent = "제거";
-                td.appendChild(btn);
-                tr.appendChild(td);
-                
-                tbody.appendChild(tr);
+}
+
+slaveMovement = () => {
+    const tbl = document.querySelectorAll('.modules table');
+
+    for(var i = 0; i<tbl.length; i++){
+        slave = tbl[i].querySelectorAll('.slave');
+        master = tbl[i].querySelector('.master');
+        for(var j = 0; j <8; j++){
+            slave[j].addEventListener('click', (e)=>{
+                e.preventDefault();
+                console.log(e.target.textContent)
+                console.log(master.textContent);
+                namespaceSlave(master.textContent, e.target.textContent);
             });
-            addDeleteEvent();
-        }else{
-            console.log('error!!');
         }
-    };
-    xhr.open('GET', '/getModules');
-    xhr.send();
+    }
+    
+}
+
+
+namespaceMaster = (nsp) => {
+    const socket = io('/namespace' + nsp);
+        socket.on('news', (data) => {
+
+        console.log(nsp);
+        socket.emit('led:off');
+    });
+}
+
+
+namespaceSlave = (nsp, port) => {
+    const socket = io('/namespace' + nsp);
+        socket.on('news', (data) => {
+
+        console.log(nsp + ' ' + port);
+        socket.emit('led:off');
+    });
+}
+
+
+window.onload = () =>{
+    slaveMovement();
+    masterMovement();
 }

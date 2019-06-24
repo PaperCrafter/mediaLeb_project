@@ -11,7 +11,8 @@ var five = require("johnny-five");
 
 class arduino{
 
-    constructor(ip){
+    constructor(ip, name, soc){
+        this.name = name;
         this.ip = ip;
         console.log(this.ip);
         this.sp = new VirtualSerialPort({
@@ -21,13 +22,21 @@ class arduino{
 
         this.board = new firmata.Board(this.sp);
         this.board.isReady = true;
-        this.socket = io.connect(config.url);
+        this.socket = soc;
         this.boardConnected;
     }
 
     connect(){
         this.board.once('ready', ()=>{
             console.log('IO Ready');
+
+            /*
+            const namespace1 = io.of('/namespace1');
+            // connection을 받으면, news 이벤트에 hello 객체를 담아 보낸다
+            namespace1.on('connection', (socket) => {
+              namespace1.emit('news', { hello: 'Someone connected at namespace1' });
+            });
+            */
 
             this.boardConnected = new five.Board({io: this.board, repl: true});
             this.boardConnected.on('ready', ()=>{
@@ -38,11 +47,12 @@ class arduino{
                 this.boardConnected.pinMode(12, five.Pin.OUTPUT);
                 this.boardConnected.digitalWrite(12, 1);
 
+                this.socket.of(`${this.name}`);
+
                 this.socket.on('led:on', ()=>{
                     led.on();
                 });
                 
-                  // Turn LED off when event led:off is received
                 this.socket.on('led:off', ()=>{
                     led.off();
                 });

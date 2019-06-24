@@ -11,24 +11,25 @@ block content
           table
             tr
               td
-                .p1(class = `slave`) s
+                .slave=1
               td
-                .p2(class = `slave`)  s
+                .slave=2
               td
-                .p3(class = `slave`)  s
+                .slave=3
             tr 
               td
-                .p4(class = `slave`)  s
+                .slave=4
               td
                 .master=`${i.name}`
               td
-                .p5(class = `slave`)  s
+                .slave=5
             tr
               td
-                .p6(class = `slave`)  s
+                .slave=6
               td
-                .p7(class = `slave`)  s
+                .slave=7
               td
-                .p8(class = `slave`)  s
+                .slave=8
 
   script(src='./mainPage.js')
+  script(src="/socket.io/socket.io.js")
