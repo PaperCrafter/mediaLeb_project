@@ -1,7 +1,9 @@
 const express = require('express');
 const {MasterBot} = require('../models');
+const master = require('../arduino');
 const router = express.Router();
 
+//master 처리 관련
 router.get('/', async(req, res, err)=>{
     const DB = await MasterBot.findAll();
 
@@ -42,10 +44,12 @@ router.get('/getList', async(req, res)=>{
 router.delete('/delete',async(req,res,next)=>{
 
     await MasterBot.destroy({where: {id: req.body.id}});
-    const DB = await MasterBot.findAll();
     res.status(201);
     res.send();
     console.log();
 });
+
+
+
 
 module.exports = router;

@@ -1,56 +1,20 @@
 extends layout
 
 block content
-    div.container_master
-        div.center-block(style="width:1200px; display:flex")
-            div.input-group(style="background:#f0f0f0; padding:10px; border-radius:10px; margin-bottom:30px; width:250px; text-align:center; flex-direction:column")
-                form#masterRegister(style="text-align:left" )
-                    h3 master 등록
-        
-                    label Name
-                    input#name.form-control(type='text', placeholder='name' name='name')
+    link(rel="stylesheet" type="text/css" href="./css/custom/adminModule.css")
 
-                    label IP-Address
-                    input#ip.form-control(type='text', placeholder='IP-Address' name='ip')
-
-                    button.btn.btn-secondary(type='submit' style="width:70%") 등록
-
-            div(style="padding:20px")
-                table#tblardu.table
-                    thead.thead-dark
-                        tr
-                            th(scope="col") #
-                            th(scope="col") Name
-                            th(scope="col" style="width:200px") IP-Address
-                            th(scope="col") Skin
-                            th(scope="col") confirm-connected
-                            th(scope="col") delete
-                    tbody
-                        for master in DB
-                            tr
-                                td= master.id
-                                td.ardu_name= master.name
-                                td= master.ip                              
-                                td
-                                    select.form-control(value=`${master.skin}`)
-                                        option LED skin
-                                        option Motor skin
-                                td 
-                                    button.btn.btn-secondary.confirm(type='submit' id=`${master.id}_confirm`) 확인
-                                td
-                                    button.btn.btn-secondary.delete(type='submit' id = `${master.id}_delete`) 제거                       
-
-    div.container_slave
+    div.page_wrapper
+        div.container_master
             div.center-block(style="width:1200px; display:flex")
                 div.input-group(style="background:#f0f0f0; padding:10px; border-radius:10px; margin-bottom:30px; width:250px; text-align:center; flex-direction:column")
                     form#masterRegister(style="text-align:left" )
-                        h3 slave 등록
+                        h3 master 등록
             
                         label Name
                         input#name.form-control(type='text', placeholder='name' name='name')
 
-                        label skin
-                        input#ip.form-control(type='text', placeholder='IP-Address' name='skin')
+                        label IP-Address
+                        input#ip.form-control(type='text', placeholder='IP-Address' name='ip')
 
                         button.btn.btn-secondary(type='submit' style="width:70%") 등록
 
@@ -58,11 +22,54 @@ block content
                     table#tblardu.table
                         thead.thead-dark
                             tr
-                                th(scope="col") #
+                                th(scope="col") #id
                                 th(scope="col") Name
+                                th(scope="col" style="width:200px") IP-Address
                                 th(scope="col") Skin
                                 th(scope="col") confirm-connected
                                 th(scope="col") delete
                         tbody
+                            for master in DB
+                                tr
+                                    td= master.id
+                                    td.ardu_name= master.name
+                                    td= master.ip                              
+                                    td
+                                        select.form-control(value=`${master.skin}`)
+                                            option LED skin
+                                            option Motor skin
+                                    td 
+                                        button.btn.btn-secondary.confirm(type='submit' id=`${master.id}_confirm`) 확인
+                                    td
+                                        button.btn.btn-secondary.delete(type='submit' id = `${master.id}_delete`) 제거                       
 
-    script(src='./sequelize.js')
+        div.container_slave
+                div.center-block(style="width:1200px; display:flex")
+                    div.input-group(style="background:#f0f0f0; padding:10px; border-radius:10px; margin-bottom:30px; width:250px; text-align:center; flex-direction:column")
+                        form#slaveRegister(style="text-align:left" )
+                            h3 slave 등록
+
+                            label master_id
+                            input#master.form-control(type='text', placeholder='master_id' name='id')
+
+                            label port
+                            input#name.form-control(type='text', placeholder='port' name='port')
+
+                            label skin
+                            input#ip.form-control(type='text', placeholder='ski' name='skin')
+
+                            button.btn.btn-secondary(type='submit' style="width:70%") 등록
+
+                    div(style="padding:20px")
+                        table#tblslave.table
+                            thead.thead-dark
+                                tr
+                                    th(scope="col") #id
+                                    th(scope="col") master
+                                    th(scope="col") port
+                                    th(scope="col") Skin
+                                    th(scope="col") confirm-connected
+                                    th(scope="col") delete
+                            tbody
+
+    script(src='./adminPage.js')

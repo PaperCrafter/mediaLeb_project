@@ -1,0 +1,44 @@
+.page_wrapper{
+    text-align:center;
+    vertical-align:middle;
+    display:table;
+    margin:auto;
+}
+
+.modules{
+    display:flex;
+    vertical-align: middle;
+    margin-left: auto;
+    margin-right:auto;
+}
+
+table{
+    width:450px;
+    height:450px;
+    margin:20px;
+}
+
+table .slave{
+    background-color:#C0C0f0;
+    width:120px;
+    height:120px;
+    border-radius:60px;
+    text-align:center;
+    vertical-align: center;
+    margin:10px;
+    font-size:12px;
+    vertical-align:middle;
+    line-height: 120px;
+}
+
+table .master{
+    background-color:#86efef;
+    width:150px;
+    height:150px;
+    border-radius:75px;
+    text-align:center;
+    margin:0 auto;
+    font-size:12px;
+    vertical-align:middle;
+    line-height:150px;
+}

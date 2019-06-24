@@ -1,0 +1,14 @@
+.page_wrapper {
+    text-align:center;
+    vertical-align:middle;
+    display:table-cell;
+    margin:auto;
+}
+
+.container_master{
+    display:inline-block;
+}
+
+.container_slave{
+    display:inline-block;
+}

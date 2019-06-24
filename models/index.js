@@ -12,11 +12,9 @@ const sequelize = new Sequelize(
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 db.MasterBot = require('./masterBot')(sequelize, Sequelize);
-
-/*
 db.SlaveBot = require('./slaveBot')(sequelize, Sequelize);
 
-db.MasterBot.hasMany(db.SlaveBot);
-db.SlaveBot.belongsTo(db.MasterBot);
-*/
+db.MasterBot.hasMany(db.SlaveBot, {foreignKey:'master', sourceKey:'id'});
+db.SlaveBot.belongsTo(db.MasterBot, {foreignKey:'master', targetKey:'id'});
+
 module.exports = db;

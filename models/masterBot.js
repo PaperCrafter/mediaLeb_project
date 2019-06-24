@@ -1,5 +1,5 @@
-module.exports = (sequelize, DataTypes)=>(
-    sequelize.define('masterBot', {
+module.exports = (sequelize, DataTypes)=>{
+    return sequelize.define('masterBot', {
         name:{
             type:DataTypes.STRING(20),
             allowNull:false,
@@ -17,7 +17,6 @@ module.exports = (sequelize, DataTypes)=>(
             allowNull:true,
         }
     },{
-        timestamps:true,
-        paranoid:true,
-    })
-);
+        timestamps:false,
+    }
+)};

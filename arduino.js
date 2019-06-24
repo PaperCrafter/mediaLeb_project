@@ -10,6 +10,7 @@ var five = require("johnny-five");
 //192.168.43.50
 
 class arduino{
+
     constructor(ip){
         this.ip = ip;
         console.log(this.ip);
@@ -48,6 +49,18 @@ class arduino{
             })
         })
     }
+
+    confirm(){
+        new Promise((resolve, reject)=>{
+            
+            const ardu = new master(this.ip);
+        }).then(()=>{
+            console.log('접속 성공');
+        }).catch(()=>{
+            console.log('접속 실패');
+        });
+    }
+
 }
 
 module.exports = arduino;

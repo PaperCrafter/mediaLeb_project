@@ -15,6 +15,7 @@ var firmata = require('firmata');
 var five = require("johnny-five");
 
 const app = express();
+
 //const Server = http.createServer(app);
 //socket.io server
 //const server = require('http').createServer(app);
@@ -22,8 +23,11 @@ const app = express();
 
 sequelize.sync();
 
-const pageRouter = require('./routes/pageRouter');
+const io = require('socket.io');
+
+const mainRouter = require('./routes/mainRouter');
 const adminRouter = require('./routes/adminRouter');
+const slaveRouter = require('./routes/slaveRouter');
 
 //미들웨어 연결
 app.set('views', path.join(__dirname, 'views'));
@@ -47,20 +51,20 @@ app.use(session({
 
 app.use(flash());
 
+app.use('/', mainRouter);
+app.use('/admin', adminRouter);
+app.use('/adminSlave', slaveRouter);
+
 console.log(config.port);
 const server = app.listen(process.env.PORT || config.port, ()=> {
   let port = process.env.PORT || config.port;
   console.log('Socket server listening at: ' + port);
 });
 
+//소켓서버 연결
+io(server);
 
-app.use('/', pageRouter);
-app.use('/admin', adminRouter);
-
-
-const io = require('socket.io')(server);
-
-
+/*
 let ardu1;
 //아두이노 모듈 불러오기
 
@@ -82,4 +86,4 @@ io.of('/arduino').on('connection', (socket) => {
   });
 
 });
-
+*/
