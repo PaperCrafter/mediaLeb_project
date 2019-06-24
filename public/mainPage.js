@@ -20,12 +20,11 @@ slaveMovement = () => {
     for(var i = 0; i<tbl.length; i++){
         slave = tbl[i].querySelectorAll('.slave');
         master = tbl[i].querySelector('.master');
+
         for(var j = 0; j <8; j++){
             slave[j].addEventListener('click', (e)=>{
                 e.preventDefault();
-                console.log(e.target.textContent)
-                console.log(master.textContent);
-                namespaceSlave(master.textContent, e.target.textContent);
+                namespaceSlave('master1', e.target.textContent);
             });
         }
     }
@@ -34,22 +33,26 @@ slaveMovement = () => {
 
 
 namespaceMaster = (nsp) => {
-    const socket = io('/namespace' + nsp);
-        socket.on('news', (data) => {
+    console.log('/' + nsp);
+    const socket = io('/' + nsp);
+    //console.log(socket);
 
-        console.log(nsp);
+    socket.emit('led');
+    /*
+    socket.on('off', (data) => {
+
         socket.emit('led:off');
     });
+    */
 }
 
 
 namespaceSlave = (nsp, port) => {
-    const socket = io('/namespace' + nsp);
-        socket.on('news', (data) => {
+    const socket = io('/' + nsp);
+    console.log('sssss');
 
-        console.log(nsp + ' ' + port);
-        socket.emit('led:off');
-    });
+    socket.emit('ledS',port);
+
 }
 
 
