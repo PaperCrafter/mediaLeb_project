@@ -24,6 +24,7 @@ router.post('/register', async(req, res, next)=>{
         await MasterBot.create({
             name :req.body.name,
             ip : req.body.ip,
+            skin:req.body.skin,
         });
 
         res.status(201);
@@ -39,6 +40,20 @@ router.get('/getList', async(req, res)=>{
     //console.log(DB);
     //res.status(201);
     res.json(DB);
+});
+
+router.patch('/:id', async(req, res, next)=>{
+    await MasterBot.update({
+        skin:req.body.skin
+    },{
+        where:{id:req.body.id}
+    }).then((result)=>{
+        res.json(result);
+    })
+    .catch((err)=>{
+        console.error(err);
+        next(err);
+    });
 });
 
 router.delete('/delete',async(req,res,next)=>{

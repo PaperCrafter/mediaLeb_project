@@ -28,6 +28,7 @@ sequelize.sync();
 const mainRouter = require('./routes/mainRouter');
 const adminRouter = require('./routes/adminRouter');
 const slaveRouter = require('./routes/slaveRouter');
+const InstructionRouter = require('./routes/InstructionRouter');
 
 //미들웨어 연결
 app.set('views', path.join(__dirname, 'views'));
@@ -54,6 +55,7 @@ app.use(flash());
 app.use('/', mainRouter);
 app.use('/admin', adminRouter);
 app.use('/adminSlave', slaveRouter);
+app.use('/instruction', InstructionRouter);
 
 console.log(config.port);
 const server = app.listen(process.env.PORT || config.port, ()=> {

@@ -6,15 +6,21 @@ block content
     div.page_wrapper
         div.container_master
             div.center-block(style="width:1200px; display:flex")
-                div.input-group(style="background:#f0f0f0; padding:10px; border-radius:10px; margin-bottom:30px; width:250px; text-align:center; flex-direction:column")
+                div.input-group(style="background:#f0f0f0; padding:10px; border-radius:10px; margin-bottom:30px; width:250px; height: 300px; text-align:center; flex-direction:column")
                     form#masterRegister(style="text-align:left" )
                         h3 master 등록
-            
+                        
                         label Name
                         input#name.form-control(type='text', placeholder='name' name='name')
 
                         label IP-Address
                         input#ip.form-control(type='text', placeholder='IP-Address' name='ip')
+
+                        label Skin
+                        select#skinMaster.form-control(value = 'None' name='skin')
+                                option None
+                                option LED
+                                option Motor
 
                         button.btn.btn-secondary(type='submit' style="width:70%") 등록
 
@@ -24,8 +30,9 @@ block content
                             tr
                                 th(scope="col") #id
                                 th(scope="col") Name
-                                th(scope="col" style="width:200px") IP-Address
-                                th(scope="col") Skin
+                                th(scope="col" style="width:120px") IP-Address
+                                th(scope="col" style="width:80px") Skin
+                                th(scope="col") Select-Skin
                                 th(scope="col") confirm-connected
                                 th(scope="col") delete
                         tbody
@@ -33,11 +40,13 @@ block content
                                 tr
                                     td= master.id
                                     td.ardu_name= master.name
-                                    td= master.ip                              
+                                    td= master.ip
+                                    td= master.skin                            
                                     td
-                                        select.form-control(value=`${master.skin}`)
-                                            option LED skin
-                                            option Motor skin
+                                        select.form-control(id =`${master.id}_master_skin`)
+                                            option None
+                                            option LED
+                                            option Motor
                                     td 
                                         button.btn.btn-secondary.confirm(type='submit' id=`${master.id}_confirm`) 확인
                                     td
@@ -45,7 +54,7 @@ block content
 
         div.container_slave
                 div.center-block(style="width:1200px; display:flex")
-                    div.input-group(style="background:#f0f0f0; padding:10px; border-radius:10px; margin-bottom:30px; width:250px; text-align:center; flex-direction:column")
+                    div.input-group(style="background:#f0f0f0; padding:10px; border-radius:10px; margin-bottom:30px; width:250px; height: 300px;  text-align:center; flex-direction:column")
                         form#slaveRegister(style="text-align:left" )
                             h3 slave 등록
 
@@ -53,10 +62,13 @@ block content
                             input#master.form-control(type='text', placeholder='master_id' name='id')
 
                             label port
-                            input#name.form-control(type='text', placeholder='port' name='port')
+                            input#port.form-control(type='text', placeholder='port' name='port')
 
                             label skin
-                            input#ip.form-control(type='text', placeholder='ski' name='skin')
+                            //-input#skin.form-control(type='text', placeholder='skin' name='skin')
+                            select#skinSlave.form-control(selected = 'Motor' name='skin')
+                                option LED
+                                option Motor
 
                             button.btn.btn-secondary(type='submit' style="width:70%") 등록
 
@@ -67,7 +79,8 @@ block content
                                     th(scope="col") #id
                                     th(scope="col") master
                                     th(scope="col") port
-                                    th(scope="col") Skin
+                                    th(scope="col" style="width:80px") Skin
+                                    th(scope="col" style="width:200px") Select-Skin
                                     th(scope="col") confirm-connected
                                     th(scope="col") delete
                             tbody

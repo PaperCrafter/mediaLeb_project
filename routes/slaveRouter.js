@@ -34,6 +34,20 @@ router.post('/', (req, res, next)=>{
 
 })
 
+router.patch('/:id', (req, res, next)=>{
+    SlaveBot.update({
+        skin:req.body.skin
+    },{
+        where:{id:req.body.id}
+    }).then((result)=>{
+        res.json(result);
+    })
+    .catch((err)=>{
+        console.error(err);
+        next(err);
+    });
+})
+
 router.delete('/:id', (req,res,next)=>{
     SlaveBot.destroy({where:{id:req.params.id}})
     .then((result)=>{

@@ -65,17 +65,7 @@ class arduino{
 
                         
                     });
-                    /*
-                    for(var i =0; i < 8; i++){
-                        soc.on('ledS', (data)=>{
-                            let res = data+2
-                            let mod = new five.Led(res);
-                            console.log('led:off' + i);
-                            mod.on();
-                        });
-        
-                    }
-                    */
+
                 });
 
                 this.namespace.on('led:on', ()=>{

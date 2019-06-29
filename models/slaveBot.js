@@ -3,7 +3,6 @@ module.exports = (sequelizer, DataTypes)=>{
         port:{
             type:DataTypes.INTEGER(20),
             allowNull:false,
-            unique:true,
         },
 
         skin:{

@@ -11,7 +11,6 @@ masterMovement = () =>{
             namespaceMaster(e.target.textContent);
         });
     }
-
 }
 
 slaveMovement = () => {
@@ -49,7 +48,7 @@ namespaceMaster = (nsp) => {
 
 namespaceSlave = (nsp, port) => {
     const socket = io('/' + nsp);
-    console.log('sssss');
+    console.log(nsp);
 
     socket.emit('ledS',port);
 
