@@ -6,7 +6,7 @@ const session = require('express-session');
 const flash = require('connect-flash');
 const {sequelize} = require('./models');
 
-const arduino = require('./arduino');
+const arduino = require('./arduino/arduino');
 
 const config = require('./config');
 

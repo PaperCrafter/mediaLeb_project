@@ -1,11 +1,13 @@
 const express = require('express');
-
+const {Skin} = require('../models');
 const router = express.Router();
 
-router.get('/', (req, res)=>{
+router.get('/', async(req, res)=>{
+    const DB = await Skin.findAll();
 
-    
-    res.render('howToUse');
+    console.log(DB);
+
+    res.render('howToUse', {DB});
 })
 
 module.exports = router;

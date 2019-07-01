@@ -1,6 +1,6 @@
 const express = require('express');
 const {MasterBot} = require('../models');
-const master = require('../arduino');
+const master = require('../arduino/arduino');
 const router = express.Router();
 
 //master 처리 관련

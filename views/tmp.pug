@@ -1,0 +1,35 @@
+extends layout
+
+block content
+  link(rel="stylesheet" type="text/css" href="./css/custom/main.css")
+
+  .page_wrapper
+    .modules
+      for i in DBMaster
+      
+        div(class=`div${i.id}`)
+          table
+            tr
+              td
+                .slave=1
+              td
+                .slave=2
+              td
+                .slave=3
+            tr 
+              td
+                .slave=4
+              td
+                .master=`${i.name}`
+              td
+                .slave=5
+            tr
+              td
+                .slave=6
+              td
+                .slave=7
+              td
+                .slave=8
+
+  script(src='./mainPage.js')
+  script(src="/socket.io/socket.io.js")

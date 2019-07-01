@@ -13,6 +13,7 @@ db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 db.MasterBot = require('./masterBot')(sequelize, Sequelize);
 db.SlaveBot = require('./slaveBot')(sequelize, Sequelize);
+db.Skin = require('./skin')(sequelize,Sequelize);
 
 db.MasterBot.hasMany(db.SlaveBot, {foreignKey:'master', sourceKey:'id'});
 db.SlaveBot.belongsTo(db.MasterBot, {foreignKey:'master', targetKey:'id'});

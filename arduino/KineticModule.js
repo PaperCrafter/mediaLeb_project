@@ -1,31 +1,13 @@
-const io = require('socket.io-client');
-const config = require('./config');
-
-var VirtualSerialPort = require('udp-serial').SerialPort;
-var firmata = require('firmata');
-var five = require("johnny-five");
+const arduino = require('./arduino');
+const five = require("johnny-five");
 // Connect to the socket server
 
 //192.168.43.155
 //192.168.43.50
 
-class arduino{
-
+class KineticModule extends arduino{
     constructor(ip, name, soc){
-        this.name = name;
-        this.ip = ip;
-        console.log(this.ip);
-        this.sp = new VirtualSerialPort({
-            host: this.ip,
-            type: 'udp4'
-        });
-
-        this.board = new firmata.Board(this.sp);
-        this.board.isReady = true;
-        this.socket = soc;
-        this.boardConnected;
-        this.namespace;
-        this.swch = 0;
+        super(ip,name,soc);
     }
 
     connect(){
@@ -101,9 +83,18 @@ class arduino{
             console.log('접속 실패');
         });
     }
+    
+    func1(){
 
+    }
+
+    func2(){
+
+    }
+
+    func3(){
+
+    }
 }
 
-module.exports = arduino;
-//led.blink(500);
-//led.blink(500);
+module.exports = KineticModule;
