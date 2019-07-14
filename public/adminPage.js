@@ -40,7 +40,9 @@ getSlave = (id)=>{
 
                 addOption(sel, "None");
                 addOption(sel, "LED");
-                addOption(sel, "Motor");
+                addOption(sel, "Kinetic");
+                addOption(sel, "Sensor");
+                addOption(sel, "Lightning");
 
                 td.appendChild(sel);
                 row.appendChild(td);
@@ -153,6 +155,7 @@ document.getElementById('slaveRegister').addEventListener('submit',(e)=>{
 
 //masterbot 로딩
 getMasterBots=()=>{
+
     var xhr = new XMLHttpRequest();
     xhr.onload = ()=>{
         if(xhr.status == 200){
@@ -183,11 +186,20 @@ getMasterBots=()=>{
                 var sel = document.createElement('select');
                 sel.id = `${master.id}_master_skin`;
                 sel.className = "form-control"
+
+                /*
+                for (const i in skin){
+                    addOption(sel, i.skin);
+                    console.log(i.skin);
+                }
+                */
+
                 addOption(sel, "None");
 
                 addOption(sel, "LED");
-                addOption(sel, "Motor");
-
+                addOption(sel, "Kinetic");
+                addOption(sel, "Sensor");
+                addOption(sel, "Lightning");
                 
                 td.appendChild(sel);
                 tr.appendChild(td);
@@ -344,6 +356,22 @@ addOption = (sel, value) =>{
     opt.text = value;
     sel.options.add(opt);
 }
+
+/*
+getSkin = () =>{
+    var xhr = new XMLHttpRequest();
+    if(xhr.status === 200||xhr.status === 201){
+        let result = JSON.parse(xhr.responseText);
+        console.log('asdfasf!!!!');
+        console.log(result)
+        return result;
+        
+    }
+    xhr.open('GET', '/instruction/getskin');
+    xhr.send();
+    
+}
+*/
 
 skinSelectEvent();
 addDeleteEvent(); 

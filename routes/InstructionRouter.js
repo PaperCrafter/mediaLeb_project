@@ -10,4 +10,14 @@ router.get('/', async(req, res)=>{
     res.render('howToUse', {DB});
 })
 
+
+
+router.get('/getskin', async(req, res)=>{
+    const skin = await Skin.findAll();
+
+    console.log(skin);
+
+    //res.render('howToUse', {skin});
+})
+
 module.exports = router;

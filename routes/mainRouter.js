@@ -4,6 +4,7 @@ const {MasterBot, SlaveBot} = require('../models');
 const router = express.Router();
 const io = require('../app');
 const arduino = require('../arduino/arduino');
+const arduFactory = require('../arduino/arduFactory')
 
 router.get('/', async(req, res)=>{
 
@@ -15,8 +16,11 @@ router.get('/', async(req, res)=>{
 
     for(var i =0;i<DBMaster.length; i++){
         console.log(global.io);
-        const ardu = new arduino(DBMaster[i].ip, DBMaster[i].name, global.io);
-        ardu.connect();
+        
+        //const ardu = new arduino(DBMaster[i].ip, DBMaster[i].name, global.io);
+        const arduFac = new arduino(DBMaster[i].ip, DBMaster[i].name, global.io, DBMaster[i].skin);
+        //ardu.connect();
+        arduFac.connect();
     }
     res.render('main', {DBMaster, DBSlave});
 });

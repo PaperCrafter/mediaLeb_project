@@ -20,7 +20,9 @@ block content
                         select#skinMaster.form-control(value = 'None' name='skin')
                                 option None
                                 option LED
-                                option Motor
+                                option Kinetic
+                                option Sensor
+                                option Lightning
 
                         button.btn.btn-secondary(type='submit' style="width:70%") 등록
 
@@ -46,7 +48,9 @@ block content
                                         select.form-control(id =`${master.id}_master_skin`)
                                             option None
                                             option LED
-                                            option Motor
+                                            option Kinetic
+                                            option Sensor
+                                            option Lightning
                                     td 
                                         button.btn.btn-secondary.confirm(type='submit' id=`${master.id}_confirm`) 확인
                                     td
@@ -66,9 +70,11 @@ block content
 
                             label skin
                             //-input#skin.form-control(type='text', placeholder='skin' name='skin')
-                            select#skinSlave.form-control(selected = 'Motor' name='skin')
+                            select#skinSlave.form-control(name='skin')
                                 option LED
-                                option Motor
+                                option Kinetic
+                                option Sensor
+                                option Lightning
 
                             button.btn.btn-secondary(type='submit' style="width:70%") 등록
 

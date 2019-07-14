@@ -14,6 +14,7 @@ loadModule= () => {
 
                 if(x % 2 == 0){
                     scndWrapper = document.createElement('div');
+                    scndWrapper.className = 'scndWarapper';
                     scndWrapper.id = `scndWarapper_${num}`;
                     wrapper.appendChild(scndWrapper);
                 }
@@ -48,11 +49,9 @@ loadModule= () => {
                     td.id = `port_${y}`
 
                     if(y == 4){
-                        td.textContent = result.DBMaster[x].name;
                         td.className ='master'
-                        td.addEventListener('click', (e) =>{
-
-                        });
+                        td.textContent = result.DBMaster[x].name + '/'+result.DBMaster[x].skin;
+                        setModuleColor(result.DBMaster[x].skin, td);
                     }
 
                     tr.appendChild(td);
@@ -65,100 +64,55 @@ loadModule= () => {
                 elem.textContent = `port : ${result.DBSlave[i].port}`;
                 elem.textContent = elem.textContent +` / ${result.DBSlave[i].skin}`
                 elem.className = 'slave';
+                setModuleColor(result.DBSlave[i].skin, elem);
             }
 
+            masterMovement();
+            slaveMovement();
+
         }
     }
-/*
-            let tbody = document.querySelector('#tblslave tbody');
-            tbody.innerHTML ='';
-            slaves.map((slave)=>{
-                let row = document.createElement('tr');
 
-                let td = document.createElement('td');
-                td.textContent = slave.id;
-                row.appendChild(td);
-
-                td = document.createElement('td');
-                td.textContent = slave.master;
-                row.appendChild(td);
-                
-                td = document.createElement('td');
-                td.textContent = slave.port;
-                row.appendChild(td);
-                
-                td = document.createElement('td');
-                td.textContent = slave.skin;
-                row.appendChild(td);
-
-                td = document.createElement('td');
-                let sel = document.createElement('select');
-                sel.id = `${slave.id}_skin`;
-
-                addOption(sel, "None");
-                addOption(sel, "LED");
-                addOption(sel, "Motor");
-
-                td.appendChild(sel);
-                row.appendChild(td);
-                
-
-                td = document.createElement('td');
-                let btn = document.createElement('button');
-                btn.className = "btn btn-secondary confirm";
-                btn.type="submit";
-                btn.id=`${slave.id}_slave_confirm`;
-                btn.textContent = "확인";
-                btn.addEventListener('click', ()=>{
-                    let xhr = new XMLHttpRequest();
-                    xhr.onload = () => {
-                        if(xhr.status === 200){
-                            getSlave(id);
-                        }
-                        else{
-                            console.error(xhr.responseText);
-                        }
-                    }
-                    xhr.open('PATCH', '/adminSlave/' + slave.id);
-                    xhr.setRequestHeader('Content-Type', 'application/json');
-                    const sel = document.getElementById(`${slave.id}_skin`).value;
-                    xhr.send(JSON.stringify({skin:sel, id:slave.id}));
-                });
-
-                td.appendChild(btn);
-                row.appendChild(td);
-
-                td = document.createElement('td');
-                let remove = document.createElement('button');
-                remove.className = "btn btn-secondary delete";
-                remove.type="submit";
-                remove.id=`${slave.id}_slave_delete`;
-                remove.textContent = "제거";
-                remove.addEventListener('click', ()=>{
-                    let xhr = new XMLHttpRequest();
-                    xhr.onload = () => {
-                        if(xhr.status === 200){
-                            getSlave(id);
-                        }
-                        else{
-                            console.error(xhr.responseText);
-                        }
-                    };
-                    xhr.open('DELETE', '/adminSlave/' + slave.id);
-                    xhr.send();
-                });
-
-                td.appendChild(remove);
-                row.appendChild(td);
-                
-                tbody.appendChild(row);
-            })
-        }
-    }
-    */
     xhr.open('GET', '/getModules');
     xhr.send();
 }
+
+
+setModuleColor = (skin, ui) =>{
+    const clr = ['#ff99cc', '#66ccff','#99cc00', '#ffcc00', '#caa6fe' ];
+
+    if(skin == 'None'){ui.style.backgroundColor = clr[0]}
+    else if(skin=="LED"){ui.style.backgroundColor = clr[1]}
+    else if(skin=="Kinetic"){ui.style.backgroundColor = clr[2]}
+    else if(skin=="Sensor"){ui.style.backgroundColor = clr[3]}
+    else if(skin=="Lightning"){ui.style.backgroundColor = clr[4]}
+}
+
+
+/*
+setModuleColor = (skin, ui) =>{
+    const xhr = new XMLHttpRequest();
+    xhr.onload = () =>{
+
+        const clr = ['#ff99cc','66ccff','99cc00','#ffcc00' ];
+
+        if(xhr.status === 200){ 
+            let result = JSON.parse(xhr.responseText);
+            //console.log(skin);
+            console.log('asd' + result.Skin[0].skin);
+            if(skin==result.Skin[0].skin){ui.style.backgroundColor = clr[0]}
+            else if(skin==result.Skin[1].skin){ui.style.backgroundColor = clr[1]}
+            else if(skin==result.Skin[2].skin){ui.style.backgroundColor = clr[2]}
+            else if(skin==result.Skin[3].skin){ui.style.backgroundColor = clr[3]}
+        }
+    }
+
+    xhr.open('GET', '/instruction/getskin');
+    xhr.send();
+}
+*/
+
+
 
 
 masterMovement = () =>{
@@ -181,7 +135,7 @@ slaveMovement = () => {
         slave = tbl[i].querySelectorAll('.slave');
         master = tbl[i].querySelector('.master');
 
-        for(var j = 0; j <8; j++){
+        for(var j = 0; j <slave.length; j++){
             slave[j].addEventListener('click', (e)=>{
                 e.preventDefault();
                 namespaceSlave('master1', e.target.textContent);
@@ -209,7 +163,7 @@ namespaceMaster = (nsp) => {
 
 namespaceSlave = (nsp, port) => {
     const socket = io('/' + nsp);
-    console.log(nsp);
+    console.log(nsp + ' : slave');
 
     socket.emit('ledS',port);
 
@@ -218,6 +172,4 @@ namespaceSlave = (nsp, port) => {
 
 window.onload = () =>{
     loadModule();
-    //slaveMovement();
-    //masterMovement();
 }
