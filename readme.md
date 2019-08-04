@@ -90,7 +90,7 @@ Medialab Robotics Platform Project
 >* slave
 >slave 모듈은 master에 연결된 모듈로서 master를 통해서 명령을 받으며 올라간 skin module에 해당하는 작업을 수행하게 됩니다.
 >slave 모듈에도 포트가 있으나 이는 다른 module로 부터 명령을 받기 위함이지, 직접 명령을 내릴 수는 없습니다.
-```
+
 
 #사용법
 
