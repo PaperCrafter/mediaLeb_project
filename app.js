@@ -27,6 +27,7 @@ sequelize.sync();
 
 const mainRouter = require('./routes/mainRouter');
 const adminRouter = require('./routes/adminRouter');
+const adminSkinRouter = require('./routes/adminSkinRouter');
 const slaveRouter = require('./routes/slaveRouter');
 const InstructionRouter = require('./routes/InstructionRouter');
 
@@ -54,6 +55,7 @@ app.use(flash());
 
 app.use('/', mainRouter);
 app.use('/admin', adminRouter);
+app.use('/adminSkin',adminSkinRouter);
 app.use('/adminSlave', slaveRouter);
 app.use('/instruction', InstructionRouter);
 

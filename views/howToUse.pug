@@ -1,30 +1,41 @@
 extends layout
 
 block content
-  .content_wrapper
-    h1 how to use
+    
+    .container
+        .blog-header
+            h1.blog-title how to use
+            p.description 사용방법을 정리해 놓은 페이지입니다.
 
+        div.row
+            div.col-sm-8.blog-main
 
-    h2 useable modules
-    table(style = 'text-align:center')
-        thead.thead-dark
-            tr
-                th(scope="col" style="width:100px") name
-                th(scope="col" style="width:100px") function1
-                th(scope="col" style="width:100px") function2
-                th(scope="col" style="width:100px") function3
+                div.blog-post
+                h2.blog-post-title 1. wifi configuration
 
-        for skins in DB  
-            div(class=`div${skins.id}`)
-                tr
-                    td
-                        p=skins.skin
-                    td
-                        p=skins.func1
-                    td
-                        p=skins.func2
-                    td
-                        p=skins.func3
+                p master의 경우에는, 전원이 들어오면 ESPXXX로 설정된 와이파이가 뜹니다.
+                p 와이파이 설정에 들어가셔서 맨 마지막 칸을 들어가주신 다음, 연구실 IP 이름과 비밀번호를 입력해서 접속해 줍니다.
+                p 메인페이지로 가시면 접속된 네트워크 혹은 와이파이 명 옆에 ip주소가 떠 있습니다.
+                p 해당 ip주소는 master module 등록에 사용됩니다.
 
+                
+                h2 2. access
+                p 로컬호스트 혹은 ip 주소를 이용하여 홈페이지에 접속
+                p master module과 slave module을 등록
+                p master을 등록할 떄는 메인 컨트롤 페이지에서 사용할 이름 / master의 로컬ip주소 / 그리고 위에 부착가능한 skin 이 3가지 정보를 설정해 줌
+  
+                h2 3. configuration
+                p master의 각 포트마다 연결된 가능을 다르게 할 것이긴 한데,디폴트로는 선 하나를 연결해서, 2 3 4 5 6 7 8 9 이렇게 하나씩 순서대로 1, 2 3 4 5 6 7 8 포트를 잡게함
+                p 나중에 포트마다 번호를 할당해 줄 예정
+                p slave가 연결될 master의 포트 번호를 입력해 주시고 master가 등록되면 맨 앞에 발급되는 숫자 id/ 그리고 skin 종류를 입력한 다음 등록을 해 줍니다.
+                
 
-    script(src='./instructionPage.js')
+                h2 4. additional information
+                ul
+                    li 일단은 LED 하나로 껐다 켰다 하게 해 놓았는데, skin 종류랑 설계가 완성되면 추가적으로 skin에 대한 클래스를 구현할 예정입니다.
+                    li skin 역시 유연하게 등록이 가능하게, admin skin에서 skin과 기능을 추가할 수 있게 구현할 예정입니다.
+                    li 와이파이는 연결했는데, 신호의 경우에는 잘 안잡힐 수 있어서 몇 번의 시도가 필요합니다.
+                    li 저도 하면서 삽질해서... 잘 안잡힐 수도 있어요. 이때는 서버컴퓨터에서 찍히는 로그를 봐주세요.
+                    li 메인 페이지 접속시 모듈과 연결을 시도하는데, 잘 되지 않을 경우 몇 번의 시도가 필요합니다.
+
+            

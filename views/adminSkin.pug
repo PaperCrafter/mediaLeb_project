@@ -1,0 +1,36 @@
+extends layout
+
+block content
+    
+    .container
+        .blog-header
+            h1.blog-title Admin Skin
+            p.description 사용 가능한 skin 목록 표시해 놓은 페이지입니다.
+
+        div.row
+            div.col-sm-8.blog-main
+
+                div.blog-post
+                h2 useable modules
+                table(style = 'text-align:center')
+                    thead.thead-dark
+                        tr
+                            th(scope="col" style="width:100px") name
+                            th(scope="col" style="width:100px") function1
+                            th(scope="col" style="width:100px") function2
+                            th(scope="col" style="width:100px") function3
+
+                    for skins in DB  
+                        div(class=`div${skins.id}`)
+                            tr
+                                td
+                                    p=skins.skin
+                                td
+                                    p=skins.func1
+                                td
+                                    p=skins.func2
+                                td
+                                    p=skins.func3
+
+        
+        script(src='./instructionPage.js')
