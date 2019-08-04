@@ -54,7 +54,7 @@ Medialab Robotics Platform Project
 >1. skin should be connected to GPIO pin number 12 of master and slave module.
 >2. for master module, number 2~9 GPIOpins would be the port to command, corresponding to port 1~8
 >3. for slave module, 2~9GPIO pin would receive commands
-```
+
 
 
 #3. Things to do next
