@@ -44,7 +44,9 @@ Medialab Robotics Platform Project
 
 
 >ps. it is very tricy to connect and run the arduino
+
 >ps2. I used a esp8266 (esp-01)m module with arduino mega (use mega2560 as possible. it has highest sucsess rate among my other arduino mega.)
+
 >ps3. use additional power supplyer as posible as descrpited in the avobe page.
 
 
@@ -109,7 +111,9 @@ Medialab Robotics Platform Project
 >(연결이 되지 않았을 경우 콘솔창에 에러가 뜨게 됩니다. // 앞선 절차에 문제가 있었거나, 아두이노와의 연결이 불안정한 상황입니다.)
 
 >ps. 연결하기가 꽤나 힘들 수 있습니다.
+
 >ps2. 아두이노 메가와 exp8266-01을 사용하였습니다. 아두이노 메가 모델 중에서는 MEGA 2560을 사용하는 것이 가장 성공률이 높았습니다.
+
 >ps3. 가끔 전력 공급이 원할하지 못하여 esp8266이 꺼졌다 켜졌다 하는 현상이 발생하는데, 튜토리얼 링크에 나온것 처럼 추가적인 전원 공급장치를 사용하는 것>도 한 방법입니다.
 
 
