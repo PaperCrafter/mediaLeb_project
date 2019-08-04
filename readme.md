@@ -57,7 +57,7 @@ Medialab Robotics Platform Project
 
 
 
-# 3. Things to do next
+## 3. Things to do next
 
 >1. if the type of the skin module is defined, additional task for the skin module will be proceeded
 >2. if there is better idea about ui then the additinal task for ui will be proceeded
@@ -121,7 +121,7 @@ Medialab Robotics Platform Project
 >3. slave 모듈의 경우, 2~9번 핀과 연결된 포트를 통해 명령을 받습니다.
 
 
-# 3. 구현해야 할 목록
+## 3. 구현해야 할 목록
 
 >1. skin 모듈의 종류가 결정이 되면, 해당 skin 모듈에 대한 작업에 들어갈 것임 (기본적으로는 4개 예상)
 >2. ui 개선안이 있다면 추가적인 ui 개선
