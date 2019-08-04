@@ -22,7 +22,7 @@ Medialab Robotics Platform Project
 >slave module is the module which are connected to master and receive commands and run the skin module attatched to it
 >slave module also has a port but this can only be used to receive command not to command
 
-```
+
 
 #1. How to use
 
