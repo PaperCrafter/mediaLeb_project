@@ -4,19 +4,19 @@ const router = express.Router();
 
 router.get('/', async(req, res)=>{
     const DB = await Skin.findAll();
-    
+    console.log(DB);
     //db에 아무것도 없을 경우 디폴트 모듈 4개를 생성
-    if(DB.count == 0){
+    console.log(DB.length);
+    if(DB.length == 0){
         let skinList = ['LED', 'Kinetic', 'Sensor', 'Lightning'];
         let functionList = ['on', 'move', 'detect', 'glow'];
 
-        for(let i =0; i < skinList.length(); i++){
-            await MasterBot.create({
+        for(let i =0; i < skinList.length; i++){
+            await Skin.create({
                 skin : skinList[i],
                 func1 : functionList[i],
             });
         }
-
     }
 
     console.log(DB);
